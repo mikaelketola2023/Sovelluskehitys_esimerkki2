@@ -1,0 +1,19 @@
+﻿<Window x:Class="Sovelluskehitys_esimerkki.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sovelluskehitys_esimerkki"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="painike_hae" Content="Hae tietokannasta" HorizontalAlignment="Left" Margin="32,75,0,0" VerticalAlignment="Top" Height="42" Width="140" Click="painike_hae_Click"/>
+        <Button x:Name="painike_lisaa" Content="Lisää tuote" HorizontalAlignment="Left" Margin="587,174,0,0" VerticalAlignment="Top" Height="40" Width="144"/>
+        <Label Content="Tuotteen nimi" HorizontalAlignment="Left" Margin="454,77,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
+        <Label Content="Tuotteen hinta" HorizontalAlignment="Left" Margin="454,124,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
+        <TextBox x:Name="tuote_nimi" HorizontalAlignment="Left" Margin="587,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24"/>
+        <TextBox x:Name="tuote_hinta" HorizontalAlignment="Left" Margin="587,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24"/>
+        <DataGrid x:Name="tuote_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,152,381,70"/>
+
+    </Grid>
+</Window>
