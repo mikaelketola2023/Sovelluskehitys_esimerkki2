@@ -33,6 +33,20 @@ namespace Sovelluskehitys_esimerkki
             string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k5000833\\source\\repos\\Sovelluskehitys_esimerkki\\tuotekanta.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection kanta = new SqlConnection(polku);
             kanta.Open();
+
+            /*tehdään sql komento*/
+            SqlCommand komento = kanta.CreateCommand();
+            komento.CommandText = "SELECT * FROM tuotteet"; // kysely
+
+            /*tehdään data adapteri ja taulu johon tiedot haetaan*/
+            SqlDataAdapter adapteri = new SqlDataAdapter(komento);
+            DataTable dt = new DataTable("tuotteet");
+            adapteri.Fill(dt);
+
+            /*sijoitetaan data-taulun tiedot DataGridiin*/
+            tuote_lista.ItemsSource = dt.DefaultView;
+
+            kanta.Close();
         }
     }
 }
