@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button x:Name="painike_hae" Content="Hae tietokannasta" HorizontalAlignment="Left" Margin="32,75,0,0" VerticalAlignment="Top" Height="42" Width="140" Click="painike_hae_Click"/>
-        <Button x:Name="painike_lisaa" Content="Lisää tuote" HorizontalAlignment="Left" Margin="587,174,0,0" VerticalAlignment="Top" Height="40" Width="144"/>
+        <Button x:Name="painike_lisaa" Content="Lisää tuote" HorizontalAlignment="Left" Margin="587,174,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="painike_lisaa_Click"/>
         <Label Content="Tuotteen nimi" HorizontalAlignment="Left" Margin="454,77,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
         <Label Content="Tuotteen hinta" HorizontalAlignment="Left" Margin="454,124,0,0" VerticalAlignment="Top" Height="30" Width="95"/>
         <TextBox x:Name="tuote_nimi" HorizontalAlignment="Left" Margin="587,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24"/>

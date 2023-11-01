@@ -48,5 +48,18 @@ namespace Sovelluskehitys_esimerkki
 
             kanta.Close();
         }
+
+        private void painike_lisaa_Click(object sender, RoutedEventArgs e)
+        {
+            SqlConnection kanta = new SqlConnection(polku);
+            kanta.Open();
+
+            string sql = "INSERT INTO tuotteet (nimi, hinta) VALUES ('" + tuote_nimi.Text + "','" + tuote_hinta.Text + "')";
+
+            SqlCommand komento = new SqlCommand(sql, kanta);
+            komento.ExecuteNonQuery();
+
+            kanta.Close();
+        }
     }
 }
