@@ -23,6 +23,7 @@ namespace Sovelluskehitys_esimerkki
     /// </summary>
     public partial class MainWindow : Window
     {
+        string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k5000833\\source\\repos\\Sovelluskehitys_esimerkki\\tuotekanta.mdf;Integrated Security=True;Connect Timeout=30";
         public MainWindow()
         {
             InitializeComponent();
@@ -30,7 +31,6 @@ namespace Sovelluskehitys_esimerkki
 
         private void painike_hae_Click(object sender, RoutedEventArgs e)
         {
-            string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k5000833\\source\\repos\\Sovelluskehitys_esimerkki\\tuotekanta.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection kanta = new SqlConnection(polku);
             kanta.Open();
 
