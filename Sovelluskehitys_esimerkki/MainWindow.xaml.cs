@@ -31,22 +31,7 @@ namespace Sovelluskehitys_esimerkki
 
         private void painike_hae_Click(object sender, RoutedEventArgs e)
         {
-            SqlConnection kanta = new SqlConnection(polku);
-            kanta.Open();
-
-            /*tehdään sql komento*/
-            SqlCommand komento = kanta.CreateCommand();
-            komento.CommandText = "SELECT * FROM tuotteet"; // kysely
-
-            /*tehdään data adapteri ja taulu johon tiedot haetaan*/
-            SqlDataAdapter adapteri = new SqlDataAdapter(komento);
-            DataTable dt = new DataTable("tuotteet");
-            adapteri.Fill(dt);
-
-            /*sijoitetaan data-taulun tiedot DataGridiin*/
-            tuote_lista.ItemsSource = dt.DefaultView;
-
-            kanta.Close();
+            paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
         }
 
         private void painike_lisaa_Click(object sender, RoutedEventArgs e)
@@ -58,6 +43,28 @@ namespace Sovelluskehitys_esimerkki
 
             SqlCommand komento = new SqlCommand(sql, kanta);
             komento.ExecuteNonQuery();
+
+            kanta.Close();
+
+            paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
+        }
+
+        private void paivitaDataGrid(string kysely, string taulu, DataGrid grid)
+        {
+            SqlConnection kanta = new SqlConnection(polku);
+            kanta.Open();
+
+            /*tehdään sql komento*/
+            SqlCommand komento = kanta.CreateCommand();
+            komento.CommandText = kysely; // kysely
+
+            /*tehdään data adapteri ja taulu johon tiedot haetaan*/
+            SqlDataAdapter adapteri = new SqlDataAdapter(komento);
+            DataTable dt = new DataTable(taulu);
+            adapteri.Fill(dt);
+
+            /*sijoitetaan data-taulun tiedot DataGridiin*/
+            grid.ItemsSource = dt.DefaultView;
 
             kanta.Close();
         }
