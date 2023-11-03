@@ -31,7 +31,14 @@ namespace Sovelluskehitys_esimerkki
 
         private void painike_hae_Click(object sender, RoutedEventArgs e)
         {
-            paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
+            try
+            {
+                paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
+            }
+            catch 
+            {
+                viestirivi.Text = "Tietojen haku epäonnistui";
+            }
         }
 
         private void painike_lisaa_Click(object sender, RoutedEventArgs e)
