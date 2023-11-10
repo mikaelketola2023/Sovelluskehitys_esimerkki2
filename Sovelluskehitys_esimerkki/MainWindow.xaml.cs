@@ -23,7 +23,8 @@ namespace Sovelluskehitys_esimerkki
     /// </summary>
     public partial class MainWindow : Window
     {
-        string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k5000833\\Documents\\tuotekanta.mdf;Integrated Security=True;Connect Timeout=30";
+        private string solun_arvo;
+        string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k5000833\\source\\repos\\Sovelluskehitys_esimerkki\\tuotekanta.mdf;Integrated Security=True;Connect Timeout=30";
         public MainWindow()
         {
             InitializeComponent();
@@ -120,6 +121,55 @@ namespace Sovelluskehitys_esimerkki
 
             paivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
             paivitaComboBox();
+        }
+
+        private void tuote_lista_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            int sarake = tuote_lista.CurrentCell.Column.DisplayIndex;
+            solun_arvo = (e.Row.Item as DataRowView).Row[sarake].ToString();
+
+            viestirivi.Text = "Sarake: " + sarake + " Arvo: " + solun_arvo;
+        }
+
+        private void tuote_lista_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            try
+            {
+                int sarake = tuote_lista.CurrentCell.Column.DisplayIndex;
+                string uusi_arvo = ((TextBox)e.EditingElement).Text;
+
+                int tuote_id = int.Parse((e.Row.Item as DataRowView).Row[0].ToString());
+
+                if (solun_arvo != uusi_arvo)
+                {
+                    string kysely = "";
+                    string kanta_sarake = "";
+                    SqlConnection kanta = new SqlConnection(polku);
+                    kanta.Open();
+
+                    if (sarake == 1) kanta_sarake = "nimi";
+                    else if (sarake == 2) kanta_sarake = "hinta";
+
+                    kysely = "UPDATE tuotteet SET " + kanta_sarake + "='" + uusi_arvo + "' WHERE id=" + tuote_id;
+
+                    SqlCommand komento = new SqlCommand(kysely, kanta);
+                    komento.ExecuteNonQuery();
+
+                    kanta.Close();
+
+                    viestirivi.Text = "Uusi arvo: " + uusi_arvo;
+
+                    paivitaComboBox();
+                }
+                else
+                {
+                    viestirivi.Text = "Arvo ei muuttunut";
+                }
+            }
+            catch
+            {
+                viestirivi.Text = "Muokkaus ei onnistunut";
+            }
         }
     }
 }
