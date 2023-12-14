@@ -265,5 +265,24 @@ namespace Sovelluskehitys_esimerkki
             paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu='0'", "tilaukset", tilaukset_lista);
             paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu='1'", "toimitetut", toimitetut_lista);
         }
+
+        private void painike_hae_tilaukset(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SqlConnection kanta = new SqlConnection(polku);
+                kanta.Open();
+
+                Console.WriteLine("Ennen paivitaDataGrid-metodia");
+
+                paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id", "tilaustiedot", tilaustiedot);
+
+                Console.WriteLine("Jälkeen paivitaDataGrid-metodia");
+            }
+            catch (Exception ex)
+            {
+                tilaviesti.Text = "Tietojen haku epäonnistui" + ex.Message;
+            }
+        }
     }
 }

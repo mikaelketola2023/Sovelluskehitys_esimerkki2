@@ -54,14 +54,14 @@
                     <Label Content="Puhelin" HorizontalAlignment="Left" Margin="32,282,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.011,0.114"/>
                     <TextBox x:Name="asiakas_nimi" HorizontalAlignment="Left" Margin="106,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197"/>
                     <TextBox x:Name="asiakas_puhelin" HorizontalAlignment="Left" Margin="106,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197" Height="18"/>
-                    <Button x:Name="painike_lisää_asiakas" Content="Lisää asiakas" HorizontalAlignment="Left" Margin="106,327,0,0" VerticalAlignment="Top" Width="197" Height="26" Click="painike_asiakas_Click"/>
+                    <Button x:Name="painike_lisää_asiakas" Content="Lisää asiakas" HorizontalAlignment="Left" Margin="329,264,0,0" VerticalAlignment="Top" Width="197" Height="26" Click="painike_asiakas_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tilaukset">
                 <Grid Background="Beige">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="35*"/>
-                        <ColumnDefinition Width="474*"/>
+                        <ColumnDefinition Width="473*"/>
                         <ColumnDefinition Width="286*"/>
                     </Grid.ColumnDefinitions>
                     <DataGrid x:Name="tilaukset_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,21,90,173" AutoGenerateColumns="False" Grid.ColumnSpan="2">
@@ -83,7 +83,7 @@
                     <Label Content="Tuote" HorizontalAlignment="Left" Margin="208,255,0,0" VerticalAlignment="Top" Grid.Column="1"/>
                     <ComboBox x:Name="combo_asiakkaat" HorizontalAlignment="Left" Margin="71,257,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
                     <ComboBox x:Name="combo_tuotteet_2" HorizontalAlignment="Left" Margin="264,257,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.508,-0.345" Grid.Column="1"/>
-                    <Button Content="Lisää tilaus" HorizontalAlignment="Left" Margin="64,303,0,0" VerticalAlignment="Top" Height="29" Width="253" Click="Button_Click" Grid.Column="1"/>
+                    <Button Content="Lisää tilaus" HorizontalAlignment="Center" Margin="0,303,0,0" VerticalAlignment="Top" Height="29" Width="252" Click="Button_Click" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Toimitetut">
@@ -108,8 +108,10 @@
                             <DataGridTextColumn Header="Toimitettu" Binding="{Binding Path='toimitettu'}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Päiväys" Binding="{Binding Path='paivays'}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Kuvaus" Binding="{Binding Path='kuvaus'}" IsReadOnly="True"/>
+
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button Content="Hae tilaukset" HorizontalAlignment="Left" Margin="483,83,0,0" VerticalAlignment="Top" Click="painike_hae_tilaukset" Height="44" Width="123"/>
                 </Grid>
             </TabItem>
         </TabControl>
