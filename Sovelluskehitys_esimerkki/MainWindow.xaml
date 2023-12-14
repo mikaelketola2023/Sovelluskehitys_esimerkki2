@@ -111,7 +111,7 @@
 
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Hae tilaukset" HorizontalAlignment="Left" Margin="483,83,0,0" VerticalAlignment="Top" Click="painike_hae_tilaukset" Height="44" Width="123"/>
+                    <Button Content="Hae kaikki tilaukset" HorizontalAlignment="Left" Margin="483,83,0,0" VerticalAlignment="Top" Click="painike_hae_kaikki_tilaukset" Height="44" Width="123"/>
                 </Grid>
             </TabItem>
         </TabControl>

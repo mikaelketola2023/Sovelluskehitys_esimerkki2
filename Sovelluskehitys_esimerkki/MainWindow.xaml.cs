@@ -266,7 +266,7 @@ namespace Sovelluskehitys_esimerkki
             paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu='1'", "toimitetut", toimitetut_lista);
         }
 
-        private void painike_hae_tilaukset(object sender, RoutedEventArgs e)
+        private void painike_hae_kaikki_tilaukset(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -278,6 +278,8 @@ namespace Sovelluskehitys_esimerkki
                 paivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id", "tilaustiedot", tilaustiedot);
 
                 Console.WriteLine("Jälkeen paivitaDataGrid-metodia");
+
+                MessageBox.Show("Haku tehty onnistuneesti", "Onnistunut haku", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
