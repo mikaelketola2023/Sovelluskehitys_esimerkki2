@@ -25,9 +25,11 @@ namespace Sovelluskehitys_esimerkki
     {
         private string solun_arvo;
         string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\mikae\\OneDrive\\Tiedostot\\Tietokanta.mdf;Integrated Security=True;Connect Timeout=30";
+        private SqlConnection kanta;
         public MainWindow()
         {
             InitializeComponent();
+            kanta = new SqlConnection(polku);
 
             PaivitaComboBox();
             PaivitaAsiakasComboBox();
@@ -50,6 +52,7 @@ namespace Sovelluskehitys_esimerkki
         }
         private void Painike_muokkaa_tuote_Click(object sender, RoutedEventArgs e)
         {
+
             try
             {
                 DataRowView selectedRow = (DataRowView)tuote_lista.SelectedItem;
@@ -57,11 +60,9 @@ namespace Sovelluskehitys_esimerkki
                 {
                     int tuoteId = Convert.ToInt32(selectedRow["id"]);
 
-                    // Voit avata uuden ikkunan tai käyttää nykyistä ikkunaa tuotteen muokkaamiseen.
-                    // Tässä esimerkissä käytetään uutta ikkunaa (TuoteMuokkausWindow).
-
-                    TuoteMuokkausWindow tuoteMuokkausIkkuna = new TuoteMuokkausWindow(tuoteId);
+                    TuoteMuokkausWindow tuoteMuokkausIkkuna = new TuoteMuokkausWindow(tuoteId, kanta);
                     tuoteMuokkausIkkuna.ShowDialog();
+                   
 
                     // Voit päivittää DataGridin, kun ikkuna on suljettu (jos päivitys on tarpeen).
                     PaivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
