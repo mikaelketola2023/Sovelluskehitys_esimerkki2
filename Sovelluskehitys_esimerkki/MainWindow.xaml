@@ -13,12 +13,13 @@
                 <MenuItem Header="_Sulje"></MenuItem>
                 <MenuItem Header="_Tallenna"></MenuItem>
             </MenuItem>
-            <MenuItem Header="_Tietokanta" Click="MenuItem_Click">
+            <MenuItem Header="_Tietokanta">
                 <MenuItem Header="_Avaa"></MenuItem>
                 <MenuItem Header="_Sulje"></MenuItem>
-                <MenuItem Header="_Tietoja"></MenuItem>
+                <Separator />
+                <MenuItem Header="_Tietoja" Click="AvaaTietojaIkkuna"></MenuItem>
             </MenuItem>
-
+                                      
         </Menu>
         <TabControl Margin="0,23,0,-23">
             <TabItem Header="Tuotetiedot">
@@ -27,7 +28,7 @@
                         <ColumnDefinition Width="135*"/>
                         <ColumnDefinition Width="262*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="painike_hae" Content="Hae tietokannasta" HorizontalAlignment="Left" Margin="42,143,0,0" VerticalAlignment="Top" Height="42" Width="140" Click="painike_hae_Click"/>
+                    <Button x:Name="painike_hae" Content="Hae tietokannasta" HorizontalAlignment="Left" Margin="42,143,0,0" VerticalAlignment="Top" Height="42" Width="140" Click="Painike_hae_Click"/>
                     <DataGrid x:Name="tuote_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="215,97,192,97" BeginningEdit="tuote_lista_BeginningEdit" CellEditEnding="tuote_lista_CellEditEnding" Grid.ColumnSpan="2"/>
                     <Label Content="Tuotteet ja hinnat" HorizontalAlignment="Left" Margin="215,56,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="200" FontSize="18"/>
                 </Grid>
@@ -39,13 +40,13 @@
                         <ColumnDefinition Width="9*"/>
                         <ColumnDefinition Width="758*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="painike_lisaa" Content="Lisää tuote" HorizontalAlignment="Left" Margin="131,150,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="painike_lisaa_Click" Grid.Column="2"/>
+                    <Button x:Name="painike_lisaa" Content="Lisää tuote" HorizontalAlignment="Left" Margin="131,150,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="Painike_lisaa_Click" Grid.Column="2"/>
                     <Label Content="Tuotteen nimi" HorizontalAlignment="Left" Margin="7,53,0,0" VerticalAlignment="Top" Height="30" Width="95" Grid.ColumnSpan="2" Grid.Column="1"/>
                     <Label Content="Tuotteen hinta" HorizontalAlignment="Left" Margin="7,100,0,0" VerticalAlignment="Top" Height="30" Width="95" Grid.ColumnSpan="2" Grid.Column="1"/>
                     <TextBox x:Name="tuote_nimi" HorizontalAlignment="Left" Margin="131,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24" Grid.Column="2"/>
                     <TextBox x:Name="tuote_hinta" HorizontalAlignment="Left" Margin="131,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24" Grid.Column="2"/>
                     <ComboBox x:Name="combo_tuotteet" HorizontalAlignment="Left" Margin="131,234,0,0" VerticalAlignment="Top" Width="144" Grid.Column="2"/>
-                    <Button x:Name="painike_poista" Content="Poista tuote" HorizontalAlignment="Left" Margin="131,286,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="painike_poista_Click" Grid.Column="2"/>
+                    <Button x:Name="painike_poista" Content="Poista tuote" HorizontalAlignment="Left" Margin="131,286,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="Painike_poista_Click" Grid.Column="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Asiakkaat">
@@ -55,7 +56,7 @@
                     <Label Content="Puhelin" HorizontalAlignment="Left" Margin="32,282,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.011,0.114"/>
                     <TextBox x:Name="asiakas_nimi" HorizontalAlignment="Left" Margin="106,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197"/>
                     <TextBox x:Name="asiakas_puhelin" HorizontalAlignment="Left" Margin="106,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197" Height="18"/>
-                    <Button x:Name="painike_lisää_asiakas" Content="Lisää asiakas" HorizontalAlignment="Left" Margin="329,264,0,0" VerticalAlignment="Top" Width="197" Height="26" Click="painike_asiakas_Click"/>
+                    <Button x:Name="painike_lisää_asiakas" Content="Lisää asiakas" HorizontalAlignment="Left" Margin="329,264,0,0" VerticalAlignment="Top" Width="197" Height="26" Click="Painike_asiakas_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tilaukset">
@@ -74,7 +75,7 @@
                             <DataGridTemplateColumn Header="Toimita">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="painike_toimita_tilaus" Content="Toimita" Click="painike_toimita_Click"/>
+                                        <Button Name="painike_toimita_tilaus" Content="Toimita" Click="Painike_toimita_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -112,7 +113,7 @@
 
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Hae kaikki tilaukset" HorizontalAlignment="Left" Margin="483,83,0,0" VerticalAlignment="Top" Click="painike_hae_kaikki_tilaukset" Height="44" Width="123"/>
+                    <Button Content="Hae kaikki tilaukset" HorizontalAlignment="Left" Margin="483,83,0,0" VerticalAlignment="Top" Click="Painike_hae_kaikki_tilaukset" Height="44" Width="123"/>
                 </Grid>
             </TabItem>
         </TabControl>
