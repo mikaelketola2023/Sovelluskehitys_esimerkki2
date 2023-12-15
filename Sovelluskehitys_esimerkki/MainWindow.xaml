@@ -29,7 +29,7 @@
                         <ColumnDefinition Width="262*"/>
                     </Grid.ColumnDefinitions>
                     <Button x:Name="painike_hae" Content="Hae tietokannasta" HorizontalAlignment="Left" Margin="42,143,0,0" VerticalAlignment="Top" Height="42" Width="140" Click="Painike_hae_Click"/>
-                    <DataGrid x:Name="tuote_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="215,97,192,97" BeginningEdit="tuote_lista_BeginningEdit" CellEditEnding="tuote_lista_CellEditEnding" Grid.ColumnSpan="2"/>
+                    <DataGrid x:Name="tuote_lista" d:ItemsSource="{d:SampleData ItemCount=4}" Margin="215,97,107,97" BeginningEdit="tuote_lista_BeginningEdit" CellEditEnding="tuote_lista_CellEditEnding" Grid.ColumnSpan="2"/>
                     <Label Content="Tuotteet ja hinnat" HorizontalAlignment="Left" Margin="215,56,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="200" FontSize="18"/>
                 </Grid>
             </TabItem>
@@ -53,12 +53,15 @@
             </TabItem>
             <TabItem Header="Asiakkaat">
                 <Grid Background="AliceBlue">
-                    <DataGrid x:Name="asiakas_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,21,375,173"/>
+                    <DataGrid x:Name="asiakas_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="32,21,375,173" CanUserAddRows="False"/>
                     <Label Content="Nimi" HorizontalAlignment="Left" Margin="32,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.713,0.496"/>
                     <Label Content="Puhelin" HorizontalAlignment="Left" Margin="32,282,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.011,0.114"/>
                     <TextBox x:Name="asiakas_nimi" HorizontalAlignment="Left" Margin="106,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197"/>
                     <TextBox x:Name="asiakas_puhelin" HorizontalAlignment="Left" Margin="106,286,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197" Height="18"/>
                     <Button x:Name="painike_lisää_asiakas" Content="Lisää asiakas" HorizontalAlignment="Left" Margin="329,264,0,0" VerticalAlignment="Top" Width="197" Height="26" Click="Painike_asiakas_Click"/>
+                    <TextBox x:Name="asiakas_email" HorizontalAlignment="Left" Margin="106,317,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197" Height="18"/>
+                    <Label Content="Email" HorizontalAlignment="Left" Margin="32,313,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.011,0.114"/>
+                    <Button x:Name="painike_muokkaa_asiakas" Content="Muokkaa asiakas" HorizontalAlignment="Left" Margin="446,207,0,0" VerticalAlignment="Top" Width="197" Height="26" Click="Painike_muokkaa_asiakas_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tilaukset">

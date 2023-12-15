@@ -218,7 +218,7 @@ namespace Sovelluskehitys_esimerkki
                 SqlConnection kanta = new SqlConnection(polku);
                 kanta.Open();
 
-                string sql = "INSERT INTO asiakkaat (nimi, puhelinnumero) VALUES ('" + asiakas_nimi.Text + "','" + asiakas_puhelin.Text + "')";
+                string sql = "INSERT INTO asiakkaat (nimi, puhelinnumero, email) VALUES ('" + asiakas_nimi.Text + "','" + asiakas_puhelin.Text + "','" + asiakas_email.Text + "')";
 
                 SqlCommand komento = new SqlCommand(sql, kanta);
                 komento.ExecuteNonQuery();
@@ -232,6 +232,57 @@ namespace Sovelluskehitys_esimerkki
                 tilaviesti.Text = "Asiakkaan lisääminen ei onnistunut";
             }
         }
+        private void Asiakas_lista_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (asiakas_lista.SelectedItem != null)
+            {
+                DataRowView row = (DataRowView)asiakas_lista.SelectedItem;
+                string nimi = row["nimi"].ToString();
+                string puhelin = row["puhelinnumero"].ToString();
+                string email = row["email"].ToString();
+
+                // Näytä tiedot tekstikentissä
+                asiakas_nimi.Text = nimi;
+                asiakas_puhelin.Text = puhelin;
+                asiakas_email.Text = email;
+            }
+        }
+        private void Painike_muokkaa_asiakas_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SqlConnection kanta = new SqlConnection(polku);
+                kanta.Open();
+
+                DataRowView selectedRow = (DataRowView)asiakas_lista.SelectedItem;
+                if (selectedRow != null)
+                {
+                    int asiakasId = Convert.ToInt32(selectedRow["id"]);
+
+                    string sql = "UPDATE asiakkaat SET nimi=@nimi, puhelinnumero=@puhelin, email=@email WHERE id=@id";
+
+                    SqlCommand komento = new SqlCommand(sql, kanta);
+                    komento.Parameters.AddWithValue("@nimi", asiakas_nimi.Text);
+                    komento.Parameters.AddWithValue("@puhelin", asiakas_puhelin.Text);
+                    komento.Parameters.AddWithValue("@email", asiakas_email.Text);
+                    komento.Parameters.AddWithValue("@id", asiakasId);
+
+                    komento.ExecuteNonQuery();
+                    kanta.Close();
+
+                    PaivitaDataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakas_lista);
+                    tilaviesti.Text = "Asiakkaan muokkaus onnistui";
+                }
+                else
+                {
+                    tilaviesti.Text = "Valitse asiakas, jota haluat muokata.";
+                }
+            }
+            catch (Exception ex)
+            {
+                tilaviesti.Text = "Asiakkaan muokkaus ei onnistunut: " + ex.Message;
+            }
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -241,13 +292,14 @@ namespace Sovelluskehitys_esimerkki
             string asiakasID = combo_asiakkaat.SelectedValue.ToString();
             string tuoteID = combo_tuotteet_2.SelectedValue.ToString();
 
-            string sql = "INSERT INTO tilaukset (asiakas_id, tuote_id) VALUES ('"+asiakasID+"', '"+tuoteID+"')";
+            string sql = "INSERT INTO tilaukset (asiakas_id, tuote_id, paivays) VALUES ('" + asiakasID + "', '" + tuoteID + "', GETDATE())"; 
 
             SqlCommand komento = new SqlCommand(sql, kanta);
             komento.ExecuteNonQuery();
             kanta.Close();
 
-            PaivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu='0'", "tilaukset", tilaukset_lista);
+            PaivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu, ti.paivays AS tilaus_paivays FROM tilaukset ti JOIN asiakkaat a ON a.id = ti.asiakas_id JOIN tuotteet tu ON tu.id = ti.tuote_id AND ti.toimitettu='0'", "tilaukset", tilaukset_lista);
+            
 
         }
 
