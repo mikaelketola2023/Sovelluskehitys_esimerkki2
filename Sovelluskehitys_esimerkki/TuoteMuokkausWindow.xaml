@@ -1,0 +1,23 @@
+﻿<Window x:Class="Sovelluskehitys_esimerkki.TuoteMuokkausWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Sovelluskehitys_esimerkki"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TuoteMuokkausWindow">
+
+    <Grid>
+        <Label Content="Tuotteen nimi:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
+        <TextBox x:Name="tuote_nimi" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="120,10,0,0"/>
+
+        <Label Content="Hinta:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0"/>
+        <TextBox x:Name="tuote_hinta" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="120,40,0,0"/>
+
+        <Label Content="Kuvaus:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,70,0,0"/>
+        <TextBox x:Name="tuote_kuvaus" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="39" Margin="120,70,0,0" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+        <Button x:Name="Painike_tallenna" Content="Tallenna" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="25" Margin="120,129,0,0" Click="Painike_tallenna_Click"/>
+    </Grid>
+</Window>

@@ -37,7 +37,6 @@ namespace Sovelluskehitys_esimerkki
             PaivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu='0'", "tilaukset", tilaukset_lista);
             PaivitaDataGrid("SELECT ti.id AS id, a.nimi AS asiakas, tu.nimi AS tuote, ti.toimitettu AS toimitettu  FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu='1'", "toimitetut", toimitetut_lista);
         }
-
         private void Painike_hae_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -47,6 +46,35 @@ namespace Sovelluskehitys_esimerkki
             catch 
             {
                 tilaviesti.Text = "Tietojen haku epäonnistui";
+            }
+        }
+        private void Painike_muokkaa_tuote_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView selectedRow = (DataRowView)tuote_lista.SelectedItem;
+                if (selectedRow != null)
+                {
+                    int tuoteId = Convert.ToInt32(selectedRow["id"]);
+
+                    // Voit avata uuden ikkunan tai käyttää nykyistä ikkunaa tuotteen muokkaamiseen.
+                    // Tässä esimerkissä käytetään uutta ikkunaa (TuoteMuokkausWindow).
+
+                    TuoteMuokkausWindow tuoteMuokkausIkkuna = new TuoteMuokkausWindow(tuoteId);
+                    tuoteMuokkausIkkuna.ShowDialog();
+
+                    // Voit päivittää DataGridin, kun ikkuna on suljettu (jos päivitys on tarpeen).
+                    PaivitaDataGrid("SELECT * FROM tuotteet", "tuotteet", tuote_lista);
+                    tilaviesti.Text = "Tuotteen muokkaus onnistui";
+                }
+                else
+                {
+                    tilaviesti.Text = "Valitse tuote, jonka haluat muokata.";
+                }
+            }
+            catch (Exception ex)
+            {
+                tilaviesti.Text = "Tuotteen muokkaus ei onnistunut: " + ex.Message;
             }
         }
 
@@ -281,6 +309,39 @@ namespace Sovelluskehitys_esimerkki
             catch (Exception ex)
             {
                 tilaviesti.Text = "Asiakkaan muokkaus ei onnistunut: " + ex.Message;
+            }
+        }
+        private void Painike_poista_asiakas_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView selectedRow = (DataRowView)asiakas_lista.SelectedItem;
+                if (selectedRow != null)
+                {
+                    int asiakasId = Convert.ToInt32(selectedRow["id"]);
+
+                    SqlConnection kanta = new SqlConnection(polku);
+                    kanta.Open();
+
+                    string sql = "DELETE FROM asiakkaat WHERE id=@id";
+
+                    SqlCommand komento = new SqlCommand(sql, kanta);
+                    komento.Parameters.AddWithValue("@id", asiakasId);
+
+                    komento.ExecuteNonQuery();
+                    kanta.Close();
+
+                    PaivitaDataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakas_lista);
+                    tilaviesti.Text = "Asiakkaan poistaminen onnistui";
+                }
+                else
+                {
+                    tilaviesti.Text = "Valitse asiakas, jonka haluat poistaa.";
+                }
+            }
+            catch (Exception ex)
+            {
+                tilaviesti.Text = "Asiakkaan poistaminen ei onnistunut: " + ex.Message;
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
