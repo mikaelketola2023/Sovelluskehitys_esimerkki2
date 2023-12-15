@@ -19,7 +19,7 @@
                 <Separator />
                 <MenuItem Header="_Tietoja" Click="AvaaTietojaIkkuna"></MenuItem>
             </MenuItem>
-                                      
+
         </Menu>
         <TabControl Margin="0,23,0,-23">
             <TabItem Header="Tuotetiedot">
@@ -47,6 +47,8 @@
                     <TextBox x:Name="tuote_hinta" HorizontalAlignment="Left" Margin="131,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24" Grid.Column="2"/>
                     <ComboBox x:Name="combo_tuotteet" HorizontalAlignment="Left" Margin="131,234,0,0" VerticalAlignment="Top" Width="144" Grid.Column="2"/>
                     <Button x:Name="painike_poista" Content="Poista tuote" HorizontalAlignment="Left" Margin="131,286,0,0" VerticalAlignment="Top" Height="40" Width="144" Click="Painike_poista_Click" Grid.Column="2"/>
+                    <TextBox x:Name="tuote_kuvaus" HorizontalAlignment="Left" Margin="361,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="24" Grid.Column="2"/>
+                    <Label Content="Kuvaus" HorizontalAlignment="Left" Margin="305,50,0,0" VerticalAlignment="Top" Height="30" Width="95" Grid.Column="2" RenderTransformOrigin="2.305,0.525"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Asiakkaat">

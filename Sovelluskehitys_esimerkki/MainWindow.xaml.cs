@@ -55,7 +55,7 @@ namespace Sovelluskehitys_esimerkki
             SqlConnection kanta = new SqlConnection(polku);
             kanta.Open();
 
-            string sql = "INSERT INTO tuotteet (nimi, hinta) VALUES ('" + tuote_nimi.Text + "','" + tuote_hinta.Text + "')";
+            string sql = "INSERT INTO tuotteet (nimi, hinta, kuvaus) VALUES ('" + tuote_nimi.Text + "','" + tuote_hinta.Text + "','" + tuote_kuvaus.Text + "')";
 
             SqlCommand komento = new SqlCommand(sql, kanta);
             komento.ExecuteNonQuery();
@@ -157,12 +157,15 @@ namespace Sovelluskehitys_esimerkki
             PaivitaComboBox();
         }
 
+        private string alkuperaisen_arvon_teksti = "";
+
         private void tuote_lista_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            int sarake = tuote_lista.CurrentCell.Column.DisplayIndex;
-            solun_arvo = (e.Row.Item as DataRowView).Row[sarake].ToString();
-
-            tilaviesti.Text = "Sarake: " + sarake + " Arvo: " + solun_arvo;
+            if (e.Column is DataGridTextColumn)
+            {
+                var solu = ((DataRowView)e.Row.DataContext).Row.ItemArray[e.Column.DisplayIndex];
+                alkuperaisen_arvon_teksti = solu.ToString();
+            }
         }
 
         private void tuote_lista_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -174,7 +177,7 @@ namespace Sovelluskehitys_esimerkki
 
                 int tuote_id = int.Parse((e.Row.Item as DataRowView).Row[0].ToString());
 
-                if (solun_arvo != uusi_arvo)
+                if (alkuperaisen_arvon_teksti != uusi_arvo)
                 {
                     string kysely = "";
                     string kanta_sarake = "";
